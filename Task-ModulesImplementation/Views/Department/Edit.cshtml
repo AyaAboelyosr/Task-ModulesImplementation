@@ -1,0 +1,82 @@
+﻿@model Task_ModulesImplementation.ViewModels.EditDepartmentViewModel
+
+@{
+    ViewData["Title"] = "Edit Department";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            margin-top: 10px;
+        }
+        .form-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="form-header">Edit Department</h2>
+            <form asp-action="SaveEdit" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="Logo">Logo</label>
+                    <input type="file" id="Logo" name="Logo" accept="image/*" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="ParentDepartmentId">Parent Department</label>
+                    <select name="ParentDepartmentId" id="ParentDepartmentId" class="form-control">
+                        <option value="">No Parent Department</option>
+                        @foreach (var deptItem in Model.parentDepartmentList)
+                        {
+                            if (Model.parentDepartmentId == deptItem.Id)
+                            {
+
+                                <option value="@deptItem.Id" selected>@deptItem.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@deptItem.Id">@deptItem.Name</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="parentDepartmentId" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary w-100" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

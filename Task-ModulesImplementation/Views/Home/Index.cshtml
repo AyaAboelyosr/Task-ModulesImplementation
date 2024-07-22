@@ -2,7 +2,54 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@if (Context.User.Identity.IsAuthenticated)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col text-center">
+                <h3>Welcome, @User.Identity.Name</h3>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        <i class="bi bi-building"></i> Departments
+                    </h5>
+                    <p class="card-text">View and manage departments.</p>
+                    <a asp-controller="Department" asp-action="Index" class="btn btn-primary">Go to Departments</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        <i class="bi bi-clock"></i> Create Reminder
+                    </h5>
+                    <p class="card-text">Set a new reminder.</p>
+                    <a asp-controller="Reminder" asp-action="CreateReminder" class="btn btn-success">Create Reminder</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col text-center">
+            <a asp-controller="Login" asp-action="Logout" class="btn btn-danger mt-3">Logout</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap CSS and JS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
